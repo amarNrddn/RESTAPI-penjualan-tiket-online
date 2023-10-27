@@ -9,7 +9,7 @@ const getAllCategoryService = async (req) => {
 
 const createCategory = async (req) => {
     const { name } = req.body
-
+    
     const check = await Category.findOne({
         name,
         organizer: req.user.organizer

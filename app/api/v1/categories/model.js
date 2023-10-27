@@ -7,7 +7,7 @@ const categorySchema = Schema(
             type: String,
             minLength: [3, 'panjang nama kategori minimal 3 karakter'],
             maxLength: [20, 'panjang nama kategori maksimal 20 karakter'],
-            required: [true, 'nama kategori harus diisi']
+            required: [true, "nama kategori harus diisi"]
         },
         organizer: {
             type: mongoose.Types.ObjectId,

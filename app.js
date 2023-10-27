@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan')
 const errorHendelerMiddlewares = require('./app/middlewares/hendeler-error')
 const NotFound = require('./app/middlewares/not-found')
+const cors = require("cors")
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(cors())
 
 // router
 const categories = require('./app/api/v1/categories/router')

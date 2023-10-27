@@ -1,3 +1,4 @@
+const { StatusCodes } = require('http-status-codes')
 const {
     getAllCategoryService,
     createCategory,
@@ -10,7 +11,7 @@ const create = async (req, res, next) => {
     try {
         const result = await createCategory(req)
 
-        res.status(201).json({
+        res.status(StatusCodes.CREATED).json({
             data: result
         })
     } catch (error) {
@@ -62,7 +63,7 @@ const destroy = async (req, res, next) => {
     try {
         const result = await deleteCategory(req);
 
-        res.status(200).json({
+        res.status(StatusCodes.OK).json({
             data: result
         })
     } catch (error) {

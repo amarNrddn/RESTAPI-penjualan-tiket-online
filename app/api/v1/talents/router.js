@@ -25,7 +25,7 @@ router.get(
 )
 
 router.put(
-    "/talens/:id",
+    "/talents/:id",
     authenticateUser,
     authorizeRoles('organizer'),
     update

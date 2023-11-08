@@ -172,8 +172,6 @@ const deleteEvent = async (req) => {
 
     if (!result) throw new BadRequestError(`Tidak ada pembicara dengan id : ${id}`)
 
-    await result.remove()
-
     return result
 }
 

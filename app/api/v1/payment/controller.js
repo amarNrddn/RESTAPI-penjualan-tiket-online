@@ -41,7 +41,7 @@ const update = async(req, res, next) => {
     try {
         const result = await updatePayment(req)
 
-        res.status(StatusCodes).json({data: result})
+        res.status(StatusCodes.OK).json({data: result})
     } catch (error) {
         next(error)
     }

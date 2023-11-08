@@ -71,8 +71,6 @@ const deleteCategory = async (req) => {
 
     if (!result) throw new NotFoundError(`Tidak ada kategori dengan id : ${id} `)
 
-    await result.remove()
-
     return result
 }
 

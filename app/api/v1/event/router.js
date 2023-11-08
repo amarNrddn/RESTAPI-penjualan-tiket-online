@@ -10,7 +10,8 @@ router.get(
     index
 )
 
-router.post("/events",
+router.post(
+    "/events",
     authenticateUser,
     authorizeRoles('organizer'),
     create

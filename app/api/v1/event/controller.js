@@ -12,7 +12,7 @@ const { StatusCodes } = require("http-status-codes")
 const create = async (req, res, next) => {
     try {
         const result = await createEvent(req)
-
+        console.log(result)
         res.status(StatusCodes.CREATED).json({ data: result })
     } catch (error) {
         next(error)
@@ -32,7 +32,7 @@ const index = async (req, res, next) => {
 const find = async (req, res, next) => {
     try {
         const result = await getOneEvent(req)
-
+    
         res.status(StatusCodes.OK).json({ data: result })
     } catch (error) {
         next(error)

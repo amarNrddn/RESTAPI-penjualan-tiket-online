@@ -29,9 +29,9 @@ router.get(
 router.put(
     '/categories/:id',
     authenticateUser,
-    authorizeRoles('organizer'
-    ),
-    update)
+    authorizeRoles('organizer'),
+    update
+)
 
 router.delete(
     '/categories/:id',

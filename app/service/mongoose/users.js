@@ -42,10 +42,17 @@ const createUsers = async (req, res) => {
     return result
 }
 
-const getAllUsers = async() => {
-    const result = await Users.find()
+const getAllUsers = async(req) => {
+    const {limit = 10, page = 1} = req.query
+    let condition = {}
+    
+    const result = await Users.find(condition)
+        .limit(limit)
+        .skip(limit * (page - 1))
+    
+    const count = await Users.countDocuments(condition)
 
-    return result
+    return {data: result, pages: Math.ceil(count / limit), total: count }
 }
 
 module.exports = { createOrganizer, createUsers, getAllUsers }

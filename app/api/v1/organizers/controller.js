@@ -1,6 +1,5 @@
 const { createOrganizer, createUsers, getAllUsers } = require("../../../service/mongoose/users")
 const { StatusCodes } = require("http-status-codes")
-const { get } = require("mongoose")
 
 const createCMSOrganizer = async (req, res, next) => {
     try {
@@ -24,9 +23,15 @@ const createCMSUser = async (req, res, next) => {
 
 const getCMSUsers = async(req, res, next) => {
     try {
-        const result = await getAllUsers()
+        const result = await getAllUsers(req)
 
-        res.status(StatusCodes.OK).json({data: result})
+        res.status(StatusCodes.OK).json({
+            data: {
+                user: result.data,
+                pages: result.pages,
+                total: result.total
+            }
+        })
     } catch (error) {
         next(error)
     }

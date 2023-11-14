@@ -19,7 +19,7 @@ router.post(
 router.get(
     "/users",
     authenticateUser,
-    authorizeRoles("owner", "organizer"),
+    authorizeRoles('owner', 'organizer'),
     getCMSUsers
 )
 

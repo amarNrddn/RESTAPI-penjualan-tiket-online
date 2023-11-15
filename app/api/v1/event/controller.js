@@ -23,7 +23,13 @@ const index = async (req, res, next) => {
     try {
         const result = await getAllEvent(req)
 
-        res.status(StatusCodes.OK).json({ data: result })
+        res.status(StatusCodes.OK).json({ 
+            data: {
+                event: result.data,
+                pages: result.pages,
+                total: result.total
+            }
+        })
     } catch (error) {
         next(error)
     }

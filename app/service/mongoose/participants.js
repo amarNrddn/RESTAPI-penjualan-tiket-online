@@ -62,7 +62,7 @@ const activatePartisipant = async (req) => {
 
 const siginParticipant = async (req) => {
   const { email, password } = req.body
-
+ 
   if (!email || !password) throw new BadRequestError('Please provide email and password')
 
   const result = await Participant.findOne({ email: email })

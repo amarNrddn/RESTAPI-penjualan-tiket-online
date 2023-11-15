@@ -25,6 +25,7 @@ const authCMSRouter = require("./app/api/v1/auth/router")
 const ordersRouter = require("./app/api/v1/orders/router")
 const partisipantsRouter = require("./app/api/v1/participants/router")
 const paymentsRouter = require("./app/api/v1/payment/router")
+const uesrRefreTokenshRouter = require("./app/api/v1/userRefreshToken/router")
 
 const v1 = '/api/v1'
 
@@ -43,6 +44,7 @@ app.use(`${v1}/cms`, authCMSRouter)
 app.use(`${v1}/cms`, ordersRouter)
 app.use(`${v1}/cms`, paymentsRouter)
 app.use(`${v1}`, partisipantsRouter)
+app.use(`${v1}`, uesrRefreTokenshRouter)
 
 // hendele error midelware
 app.use(errorHendelerMiddlewares)

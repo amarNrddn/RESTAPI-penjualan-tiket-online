@@ -47,7 +47,7 @@ const createEvent = async (req) => {
 }
 
 const getAllEvent = async (req) => {
-    const { keyword, category, talent, status } = req.query
+    const { page = 1, limit = 10, keyword, category, talent, status } = req.query
 
     let condition = { organizer: req.user.organizer }
 
@@ -57,7 +57,7 @@ const getAllEvent = async (req) => {
 
     if (talent) condition = { ...condition, talent: talent }
 
-    if(["Draft", "Published"].includes(status)){
+    if (["Draft", "Published"].includes(status)) {
         condition = {
             ...condition,
             statusEvent: status
@@ -77,8 +77,12 @@ const getAllEvent = async (req) => {
             path: "talent",
             select: "_id name"
         })
+        .limit(limit)
+        .skip(limit * (page - 1))
 
-    return result
+    const count = await Event.countDocuments(condition)
+
+    return { data: result, pages: Math.ceil(count / limit), total: count }
 }
 
 const getOneEvent = async (req) => {

@@ -1,25 +1,33 @@
 const User = require("../../api/v1/users/model")
 const { BadRequestError, Unauthorized } = require("../../errors")
-const { createTokenUser, createJWT } = require("../../utils")
+const { createRefreshJWT, createJWT } = require("../../utils")
+const { createUserRefreshToken } = require('./refreshToken')
 
 const sigin = async (req) => {
     const { email, password } = req.body
 
-    if(!email || !password) {
+    if (!email || !password) {
         throw new BadRequestError("Please provide email and password")
     }
 
-    const result = await User.findOne({email: email})
+    const result = await User.findOne({ email: email })
 
-    if(!result) throw new Unauthorized("Invalid Credential")
+    if (!result) throw new Unauthorized("Invalid Credential")
 
     const isPasswordCorrect = await result.comparePassword(password)
-    
-    if(!isPasswordCorrect) throw new Unauthorized("Invalid Credential")
 
-    const token = createJWT({payload: createTokenUser(result)})
+    if (!isPasswordCorrect) throw new Unauthorized("Invalid Credential")
 
-    return {token, role: result.role}
+    const token = createJWT({ payload: createTokenUser(result) })
+
+    const refreshToken = createRefreshJWT({ payload: createTokenUser(result) })
+
+    await createUserRefreshToken({
+        refreshToken,
+        user: result._id
+    })
+
+    return { token, role: result.role, refreshToken, email: result.email }
 }
 
-module.exports = {sigin}
+module.exports = { sigin }

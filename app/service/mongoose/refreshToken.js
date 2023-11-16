@@ -8,7 +8,7 @@ const {
 const { NotFoundError } = require('../../errors')
 
 const createUserRefreshToken = async (payload) => {
-    const result = await UserRefreshToken.crate(payload)
+    const result = await UserRefreshToken.create(payload)
 
     return result
 }

@@ -1,6 +1,6 @@
 const User = require("../../api/v1/users/model")
 const { BadRequestError, Unauthorized } = require("../../errors")
-const { createRefreshJWT, createJWT } = require("../../utils")
+const { createRefreshJWT, createJWT, createTokenUser } = require("../../utils")
 const { createUserRefreshToken } = require('./refreshToken')
 
 const sigin = async (req) => {
@@ -18,6 +18,7 @@ const sigin = async (req) => {
 
     if (!isPasswordCorrect) throw new Unauthorized("Invalid Credential")
 
+    // token
     const token = createJWT({ payload: createTokenUser(result) })
 
     const refreshToken = createRefreshJWT({ payload: createTokenUser(result) })

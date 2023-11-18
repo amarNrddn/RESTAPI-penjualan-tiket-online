@@ -6,7 +6,7 @@ const index = async (req, res, next) => {
         const result = await getUsersRefreshToken(req)
 
         res.status(StatusCodes.OK).json({
-            data: { token: result }
+            data: result
         })
     } catch (error) {
         next(error)

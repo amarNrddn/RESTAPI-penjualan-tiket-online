@@ -5,7 +5,7 @@ const {
     createJWT,
     createTokenUser
 } = require('../../utils')
-const { NotFoundError } = require('../../errors')
+const { NotFoundError, BadRequestError } = require('../../errors')
 
 const createUserRefreshToken = async (payload) => {
     const result = await UserRefreshToken.create(payload)
@@ -19,6 +19,8 @@ const getUsersRefreshToken = async (req) => {
     const result = await UserRefreshToken.findOne({
         refreshToken
     })
+
+    if(!result) throw new BadRequestError("Token tidak ada")
 
     const payload = isTokenValidRefreshToken({ token: result.refreshToken })
 

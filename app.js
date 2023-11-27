@@ -29,12 +29,6 @@ const uesrRefreTokenshRouter = require("./app/api/v1/userRefreshToken/router")
 
 const v1 = '/api/v1'
 
-app.get('/', (req, res) => {
-    res.status(200).json({
-        message: 'testing nodemon',
-    })
-})
-
 app.use(`${v1}/cms`, categories)
 app.use(`${v1}/cms`, images)
 app.use(`${v1}/cms`, talentsRouter)

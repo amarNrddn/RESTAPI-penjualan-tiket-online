@@ -31,7 +31,7 @@ const EventSchema = new mongoose.Schema(
             type: String,
             required: [true, "Judul harus di isi"],
             minlength: 3,
-            maxlength: 20,
+            maxlength: 50,
         },
         date: {
             type: Date,
